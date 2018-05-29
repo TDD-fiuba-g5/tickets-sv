@@ -7,7 +7,8 @@ class UsersController < ApiController
 
 	def logIn
 		user = User.find_by(name: user_params[:name])
-		if (user.password == user_params[:password])
+
+		if (user.authenticate(user_params[:password]))
 			render :json => user
 		else
 			render status: 401, json: {message: "Invalid password"}.to_json
