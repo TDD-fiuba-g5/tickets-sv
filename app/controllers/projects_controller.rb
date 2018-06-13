@@ -12,15 +12,12 @@ class ProjectsController < ApiController
 	end
 
 	def create
-		puts "asfasdf"
-		puts project_params
-		puts "aca termina"
 		project = Project.create!(project_params)
 		render :json => project, include: :states
 	end
 
 	def project_params
-		params.permit(:name, :description, :owner_id, states_attributes: [:title])
+		params.permit(:name, :description, :owner_id, states_attributes: [:title], user_attributes: [:id])
 	end
 
 end
